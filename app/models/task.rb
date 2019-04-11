@@ -16,9 +16,11 @@ module Tasker
       @date_created = new_task['date_created']
       @assignee = new_task['assignee']
       @reporter = new_task['reporter']
+      @status = new_task['status'] || 'new'
     end
 
-    attr_reader :id, :title, :description, :date_created, :assignee, :reporter
+    attr_reader :id, :title, :description, :date_created, :assignee, :reporter,
+                :status
 
     def to_json(options = {}) # rubocop:disable Metrics/MethodLength
       JSON(
@@ -28,7 +30,8 @@ module Tasker
           description: description,
           date_created: date_created,
           assignee: assignee,
-          reporter: reporter
+          reporter: reporter,
+          status: status
         },
         options
       )
